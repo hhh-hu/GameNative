@@ -38,17 +38,19 @@ fun SettingsGroupEmulation() {
             onDismiss = { showOrientationDialog = false },
         )
 
-        ContainerConfigDialog(
-            visible = showConfigDialog,
-            title = stringResource(R.string.settings_emulation_default_config_dialog_title),
-            default = true,
-            initialConfig = ContainerUtils.getDefaultContainerData(),
-            onDismissRequest = { showConfigDialog = false },
-            onSave = {
-                showConfigDialog = false
-                ContainerUtils.setDefaultContainerData(it)
-            },
-        )
+        if (showConfigDialog) {
+            ContainerConfigDialog(
+                visible = true,
+                title = stringResource(R.string.settings_emulation_default_config_dialog_title),
+                default = true,
+                initialConfig = ContainerUtils.getDefaultContainerData(),
+                onDismissRequest = { showConfigDialog = false },
+                onSave = {
+                    showConfigDialog = false
+                    ContainerUtils.setDefaultContainerData(it)
+                },
+            )
+        }
 
         Box64PresetsDialog(
             visible = showBox64PresetsDialog,
